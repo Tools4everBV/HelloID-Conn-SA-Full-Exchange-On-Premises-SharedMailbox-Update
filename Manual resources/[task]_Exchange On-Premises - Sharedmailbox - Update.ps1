@@ -3,7 +3,7 @@ $mailbox = $form.gridmailbox
 $mailboxDisplayName = $form.displayName
 $mailboxMailPrefix = $form.mailPrefix
 $mailboxMailDomain = $form.mailDomain.id
-$blnSetAsPrimaryEmail = [System.Convert]::ToBoolean($form.blnSetAsPrimaryEmail)
+$blnSetAsPrimaryEmail = if ([string]::IsNullOrWhiteSpace($form.blnSetAsPrimaryEmail)) { $false } else { [System.Convert]::ToBoolean($form.blnSetAsPrimaryEmail) }
 # Build proxy address with appropriate prefix based on whether it should be primary
 if ($blnSetAsPrimaryEmail) {
    $mailboxProxyAddress = "SMTP:$($mailboxMailPrefix)@$($mailboxMailDomain)"
